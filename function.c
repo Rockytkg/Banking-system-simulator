@@ -20,7 +20,7 @@ void countdown(int pause_time) {
         printf("按下 \033[1;32mEnter\033[0m 键或等待 \033[1;32m倒计时\033[0m \033[1;31m结束\033[0m 可以继续操作\n");
         while (sleep_time > 0) {
             sleep_time--;
-            printf("\r倒计时 %d 秒 ", sleep_time);;
+            printf("\r倒计时 %d 秒 ", sleep_time);
             fflush(stdout);
             if (kbhit()) {
                 char input = getchar();
