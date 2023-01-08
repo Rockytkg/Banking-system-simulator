@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: C_home
+# Project: bank_system
 # Configurations: Debug
 # =============================================================================
 
@@ -39,58 +39,64 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = E$:/C-home/cmake-build-debug/
+cmake_ninja_workdir = E$:/C/bank_system/cmake-build-debug/
 # =============================================================================
-# Object build statements for EXECUTABLE target C_home
+# Object build statements for EXECUTABLE target bank_system
 
 
 #############################################
-# Order-only phony target for C_home
+# Order-only phony target for bank_system
 
-build cmake_object_order_depends_target_C_home: phony || CMakeFiles/C_home.dir
+build cmake_object_order_depends_target_bank_system: phony || CMakeFiles/bank_system.dir
 
-build CMakeFiles/C_home.dir/main.c.obj: C_COMPILER__C_home_Debug E$:/C-home/main.c || cmake_object_order_depends_target_C_home
-  DEP_FILE = CMakeFiles\C_home.dir\main.c.obj.d
+build CMakeFiles/bank_system.dir/init.c.obj: C_COMPILER__bank_system_Debug E$:/C/bank_system/init.c || cmake_object_order_depends_target_bank_system
+  DEP_FILE = CMakeFiles\bank_system.dir\init.c.obj.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  OBJECT_DIR = CMakeFiles\C_home.dir
-  OBJECT_FILE_DIR = CMakeFiles\C_home.dir
+  OBJECT_DIR = CMakeFiles\bank_system.dir
+  OBJECT_FILE_DIR = CMakeFiles\bank_system.dir
 
-build CMakeFiles/C_home.dir/menu.c.obj: C_COMPILER__C_home_Debug E$:/C-home/menu.c || cmake_object_order_depends_target_C_home
-  DEP_FILE = CMakeFiles\C_home.dir\menu.c.obj.d
+build CMakeFiles/bank_system.dir/menu.c.obj: C_COMPILER__bank_system_Debug E$:/C/bank_system/menu.c || cmake_object_order_depends_target_bank_system
+  DEP_FILE = CMakeFiles\bank_system.dir\menu.c.obj.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  OBJECT_DIR = CMakeFiles\C_home.dir
-  OBJECT_FILE_DIR = CMakeFiles\C_home.dir
+  OBJECT_DIR = CMakeFiles\bank_system.dir
+  OBJECT_FILE_DIR = CMakeFiles\bank_system.dir
 
-build CMakeFiles/C_home.dir/function.c.obj: C_COMPILER__C_home_Debug E$:/C-home/function.c || cmake_object_order_depends_target_C_home
-  DEP_FILE = CMakeFiles\C_home.dir\function.c.obj.d
+build CMakeFiles/bank_system.dir/function.c.obj: C_COMPILER__bank_system_Debug E$:/C/bank_system/function.c || cmake_object_order_depends_target_bank_system
+  DEP_FILE = CMakeFiles\bank_system.dir\function.c.obj.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  OBJECT_DIR = CMakeFiles\C_home.dir
-  OBJECT_FILE_DIR = CMakeFiles\C_home.dir
+  OBJECT_DIR = CMakeFiles\bank_system.dir
+  OBJECT_FILE_DIR = CMakeFiles\bank_system.dir
+
+build CMakeFiles/bank_system.dir/GUI.cpp.obj: CXX_COMPILER__bank_system_Debug E$:/C/bank_system/GUI.cpp || cmake_object_order_depends_target_bank_system
+  DEP_FILE = CMakeFiles\bank_system.dir\GUI.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++11
+  OBJECT_DIR = CMakeFiles\bank_system.dir
+  OBJECT_FILE_DIR = CMakeFiles\bank_system.dir
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target C_home
+# Link build statements for EXECUTABLE target bank_system
 
 
 #############################################
-# Link the executable C_home.exe
+# Link the executable bank_system.exe
 
-build C_home.exe: C_EXECUTABLE_LINKER__C_home_Debug CMakeFiles/C_home.dir/main.c.obj CMakeFiles/C_home.dir/menu.c.obj CMakeFiles/C_home.dir/function.c.obj
+build bank_system.exe: CXX_EXECUTABLE_LINKER__bank_system_Debug CMakeFiles/bank_system.dir/init.c.obj CMakeFiles/bank_system.dir/menu.c.obj CMakeFiles/bank_system.dir/function.c.obj CMakeFiles/bank_system.dir/GUI.cpp.obj
   FLAGS = -g
-  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\C_home.dir
+  LINK_LIBRARIES = -Wl,-Bstatic  -leasyx  -Wl,-Bdynamic  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\bank_system.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_FILE = C_home.exe
-  TARGET_IMPLIB = libC_home.dll.a
-  TARGET_PDB = C_home.exe.dbg
+  TARGET_FILE = bank_system.exe
+  TARGET_IMPLIB = libbank_system.dll.a
+  TARGET_PDB = bank_system.exe.dbg
 
 
 #############################################
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D E:\C-home\cmake-build-debug && "D:\Program Files\JetBrains\CLion 2022.3.1\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D E:\C\bank_system\cmake-build-debug && "D:\Program Files\JetBrains\CLion 2022.3.1\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -101,7 +107,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D E:\C-home\cmake-build-debug && "D:\Program Files\JetBrains\CLion 2022.3.1\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SE:\C-home -BE:\C-home\cmake-build-debug"
+  COMMAND = cmd.exe /C "cd /D E:\C\bank_system\cmake-build-debug && "D:\Program Files\JetBrains\CLion 2022.3.1\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SE:\C\bank_system -BE:\C\bank_system\cmake-build-debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -111,7 +117,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
-build C_home: phony C_home.exe
+build bank_system: phony bank_system.exe
 
 # =============================================================================
 # Folder targets.
@@ -119,9 +125,9 @@ build C_home: phony C_home.exe
 # =============================================================================
 
 #############################################
-# Folder: E:/C-home/cmake-build-debug
+# Folder: E:/C/bank_system/cmake-build-debug
 
-build all: phony C_home.exe
+build all: phony bank_system.exe
 
 # =============================================================================
 # Built-in targets
@@ -130,14 +136,14 @@ build all: phony C_home.exe
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | CMakeCache.txt CMakeFiles/3.24.2/CMakeCCompiler.cmake CMakeFiles/3.24.2/CMakeRCCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeCInformation.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeGenericSystem.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeRCInformation.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Compiler/GNU-C.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Compiler/GNU.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows-GNU-C-ABI.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows-GNU-C.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows-GNU.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows-windres.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/WindowsPaths.cmake E$:/C-home/CMakeLists.txt
+build build.ninja: RERUN_CMAKE | CMakeCache.txt CMakeFiles/3.24.2/CMakeCCompiler.cmake CMakeFiles/3.24.2/CMakeCXXCompiler.cmake CMakeFiles/3.24.2/CMakeRCCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeCInformation.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeCXXInformation.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeGenericSystem.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeRCInformation.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Compiler/GNU-C.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Compiler/GNU-CXX.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Compiler/GNU.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows-GNU-C-ABI.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows-GNU-C.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows-GNU-CXX-ABI.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows-GNU-CXX.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows-GNU.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows-windres.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/WindowsPaths.cmake E$:/C/bank_system/CMakeLists.txt
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build CMakeCache.txt CMakeFiles/3.24.2/CMakeCCompiler.cmake CMakeFiles/3.24.2/CMakeRCCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeCInformation.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeGenericSystem.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeRCInformation.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Compiler/GNU-C.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Compiler/GNU.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows-GNU-C-ABI.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows-GNU-C.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows-GNU.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows-windres.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/WindowsPaths.cmake E$:/C-home/CMakeLists.txt: phony
+build CMakeCache.txt CMakeFiles/3.24.2/CMakeCCompiler.cmake CMakeFiles/3.24.2/CMakeCXXCompiler.cmake CMakeFiles/3.24.2/CMakeRCCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeCInformation.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeCXXInformation.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeGenericSystem.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeRCInformation.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Compiler/GNU-C.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Compiler/GNU-CXX.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Compiler/GNU.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows-GNU-C-ABI.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows-GNU-C.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows-GNU-CXX-ABI.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows-GNU-CXX.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows-GNU.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows-windres.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows.cmake D$:/Program$ Files/JetBrains/CLion$ 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/WindowsPaths.cmake E$:/C/bank_system/CMakeLists.txt: phony
 
 
 #############################################

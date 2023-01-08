@@ -18,6 +18,10 @@
 			"path" : "cmake-build-debug/CMakeFiles/3.24.2/CMakeCCompiler.cmake"
 		},
 		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/3.24.2/CMakeCXXCompiler.cmake"
+		},
+		{
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "D:/Program Files/JetBrains/CLion 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake"
@@ -100,13 +104,53 @@
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "D:/Program Files/JetBrains/CLion 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "D:/Program Files/JetBrains/CLion 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeCXXInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "D:/Program Files/JetBrains/CLion 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "D:/Program Files/JetBrains/CLion 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Compiler/GNU-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "D:/Program Files/JetBrains/CLion 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Compiler/GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "D:/Program Files/JetBrains/CLion 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows-GNU-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "D:/Program Files/JetBrains/CLion 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows-GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "D:/Program Files/JetBrains/CLion 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/Platform/Windows-GNU-CXX-ABI.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "D:/Program Files/JetBrains/CLion 2022.3.1/bin/cmake/win/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake"
 		}
 	],
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "E:/C-home/cmake-build-debug",
-		"source" : "E:/C-home"
+		"build" : "E:/C/bank_system/cmake-build-debug",
+		"source" : "E:/C/bank_system"
 	},
 	"version" : 
 	{

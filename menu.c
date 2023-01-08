@@ -1,4 +1,25 @@
-#include "main.h"
+#include "functions.h"
+
+int input_select() {
+    saveBankAccounts();
+    char ch, choose;
+    int index = 0;
+    while ((ch = getch()) != '\r') {
+        if (isdigit(ch)) {
+            if (index < 1) {
+                putchar(ch);
+                choose = ch;
+                index++;
+            }
+        } else if (ch == '\b' && index != 0) {
+            index--;
+            printf("\b \b"); // 将光标向前移动一位，并将字符清除
+        }
+    }
+    index = atoi(&choose);
+    printf("\n");
+    return index;
+}
 
 void menu1() {
     system("cls");//清屏
@@ -25,13 +46,12 @@ void menu1() {
 }
 
 void menu2() {
-    int choose;
+    int ch;
     while (1) {
         menu4();
-        choose:
-        scanf("%d", &choose);
+        ch = input_select();
         countdown(0);
-        switch (choose) {
+        switch (ch) {
             case 1:
                 deposit();
                 break;
@@ -45,98 +65,54 @@ void menu2() {
                 change_password();
                 break;
             case 5:
-                print_recording();
+                queryBalance();
                 break;
             case 6:
+                deleteAccount();
+                printTransactions();
+                break;
+            case 7:
+                printTransactions();
+                break;
+            case 8:
                 return;
             default:
                 printf("您的输入不合法，请重新输入:");
-                goto choose;
         }
     }
 }
 
 int menu3() {
     int choose;
+    printf("\t\t\t\t★——————————————————————————————————————————————★\n\n");
+    printf("\t\t\t\t             | 1. 返回上级 |\n\n");
+    printf("\t\t\t\t             | 2. 继续操作 |\n\n");
+    printf("\t\t\t\t★——————————————————————————————————————————————★\n");
+    printf("请选择:");
     while (1) {
-        printf("\t\t\t\t★——————————————————————————————————————————————★\n\n");
-        printf("\t\t\t\t             | 1. 返回上级 |\n\n");
-        printf("\t\t\t\t             | 2. 继续操作 |\n\n");
-        printf("\t\t\t\t★——————————————————————————————————————————————★\n");
-        printf("请选择:");
-        scanf("%d", &choose);
-        countdown(0);
-        if (choose == 1 || choose == 2)
+        choose = input_select();
+        if (choose == 1 || choose == 2) {
+            countdown(0);
             return choose;
-        printf("您的输入不合法，请重新输入\n");
+        }
+        printf("您的输入不合法，请重新输入:");
     }
 }
 
 void menu4() {
     printf("\t\t\t\t★——————————————————————————————————————————————★\n\n");
     printf("\t\t\t\t   | 1. 存款       2. 取款       3. 转账     |\n\n");
-    printf("\t\t\t\t   | 4. 修改密码   5. 查询记录   6. 退出系统 |\n\n");
+    printf("\t\t\t\t   | 4. 修改密码   5. 查询余额   6. 删除账户 |\n\n");
+    printf("\t\t\t\t   | 7. 查询交易记录             8. 退出系统 |\n\n");
     printf("\t\t\t\t★——————————————————————————————————————————————★\n");
     printf("请选择:");
 }
 
 void menu5() {
     printf("\033[1;31m程序说明：\033[0m\n\n");
-    printf("\033[1m本程序会在当前目录下创建\033[32m'balance.txt'、'password.txt'、'recording.txt'\033[0m三个文件，用于存储数据，如果已经存在这三个文件，请做好备份，\n");
-    printf("因为本程序可能会\033[1;31m修改\033[0m\033[1m这三个文件的内容(提示：不在使用本程序后请自行删除)\n\n");
+    printf("\033[1m本程序会在当前目录下创建\033[32m'bankAccounts.dat'\033[0m文件，用于存储数据，如果已经存在这个文件，请做好备份，\n");
+    printf("因为本程序可能会\033[1;31m修改\033[0m\033[1m这个文件的内容(提示：不在使用本程序后请自行删除)\n\n");
     printf("\033[1;31m警告：\n");
     printf("如不接受，请立即关闭此程序！！！\n\n\033[0m");
     countdown(60);
-}
-
-float f(float x, float y, float z) {
-    float a = x * x + 9.0f / 4.0f * y * y + z * z - 1;
-    return a * a * a - x * x * z * z * z - 9.0f / 80.0f * y * y * z * z * z;
-}
-
-float h(float x, float z) {
-    for (float y = 1.0f; y >= 0.0f; y -= 0.001f) {
-        if (f(x, y, z) <= 0.0f) {
-            return y;
-        }
-    }
-    return 0.0f;
-}
-
-int love() {
-    HANDLE console_handle = GetStdHandle(STD_OUTPUT_HANDLE);
-    _TCHAR buffer[25][80] = {_T(' ')};
-    _TCHAR ramp[] = _T(".:-=+*#%@");
-
-    for (float t = 0.0f;; t += 0.1f) {
-        int sy = 0;
-        float s = sinf(t);
-        float a = s * s * s * s * 0.2f;
-        for (float z = 1.3f; z > -1.2f; z -= 0.1f) {
-            _TCHAR *p = &buffer[sy++][0];
-            float tz = z * (1.2f - a);
-            for (float x = -1.5f; x < 1.5f; x += 0.05f) {
-                float tx = x * (1.2f + a);
-                float v = f(tx, 0.0f, tz);
-                if (v <= 0.0f) {
-                    float y0 = h(tx, tz);
-                    float ny = 0.01f;
-                    float nx = h(tx + ny, tz) - y0;
-                    float nz = h(tx, tz + ny) - y0;
-                    float nd = 1.0f / sqrtf(nx * nx + ny * ny + nz * nz);
-                    float d = (nx + ny - nz) * nd * 0.5f + 0.5f;
-                    *p++ = ramp[(int) (d * 5.0f)];
-                } else {
-                    *p++ = ' ';
-                }
-            }
-        }
-
-        for (sy = 0; sy < 25; sy++) {
-            COORD coord = {0, sy};
-            SetConsoleCursorPosition(console_handle, coord);
-            WriteConsole(console_handle, buffer[sy], 79, NULL, 0);
-        }
-        Sleep(33);
-    }
 }

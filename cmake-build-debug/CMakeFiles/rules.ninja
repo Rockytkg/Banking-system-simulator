@@ -6,7 +6,7 @@
 # It is included in the main 'build.ninja'.
 
 # =============================================================================
-# Project: C_home
+# Project: bank_system
 # Configurations: Debug
 # =============================================================================
 # =============================================================================
@@ -14,19 +14,29 @@
 #############################################
 # Rule for compiling C files.
 
-rule C_COMPILER__C_home_Debug
+rule C_COMPILER__bank_system_Debug
   depfile = $DEP_FILE
   deps = gcc
-  command = D:\PROGRA~3\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  command = D:\TDM-GCC-64\bin\gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
   description = Building C object $out
 
 
 #############################################
-# Rule for linking C executable.
+# Rule for compiling CXX files.
 
-rule C_EXECUTABLE_LINKER__C_home_Debug
-  command = cmd.exe /C "$PRE_LINK && D:\PROGRA~3\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe $FLAGS $LINK_FLAGS $in -o $TARGET_FILE -Wl,--out-implib,$TARGET_IMPLIB -Wl,--major-image-version,0,--minor-image-version,0 $LINK_PATH $LINK_LIBRARIES && $POST_BUILD"
-  description = Linking C executable $TARGET_FILE
+rule CXX_COMPILER__bank_system_Debug
+  depfile = $DEP_FILE
+  deps = gcc
+  command = D:\TDM-GCC-64\bin\c++.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  description = Building CXX object $out
+
+
+#############################################
+# Rule for linking CXX executable.
+
+rule CXX_EXECUTABLE_LINKER__bank_system_Debug
+  command = cmd.exe /C "$PRE_LINK && D:\TDM-GCC-64\bin\c++.exe $FLAGS $LINK_FLAGS $in -o $TARGET_FILE -Wl,--out-implib,$TARGET_IMPLIB -Wl,--major-image-version,0,--minor-image-version,0 $LINK_PATH $LINK_LIBRARIES && $POST_BUILD"
+  description = Linking CXX executable $TARGET_FILE
   restat = $RESTAT
 
 
@@ -42,7 +52,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = "D:\Program Files\JetBrains\CLion 2022.3.1\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SE:\C-home -BE:\C-home\cmake-build-debug
+  command = "D:\Program Files\JetBrains\CLion 2022.3.1\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SE:\C\bank_system -BE:\C\bank_system\cmake-build-debug
   description = Re-running CMake...
   generator = 1
 
