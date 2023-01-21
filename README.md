@@ -16,7 +16,7 @@ C/C++编译器 MinGW
 按照程序提示操作
 # 注意事项
 如果在运行中遇到问题，请检查是否安装了正确的环境。
-如果仍有问题，请提交 issue。
+如果仍有问题，请提交 [issue](https://github.com/Rockytkg/bank_system/issues)。
 # 开发者
 Rockytkg
 # 下个版本计划
