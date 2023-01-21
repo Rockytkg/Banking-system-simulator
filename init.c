@@ -15,70 +15,60 @@ void open_file(FILE *fp) {
     }
 }
 
-// 将链表数据存储在文件中
 void saveBankAccounts() {
-    FILE *file = fopen("bankAccounts.dat", "wb");
+    FILE *file = fopen("bankAccounts.dat", "w");
     open_file(file);
     BankAccount *current = head;
     while (current != NULL) {
         int nameLength = strlen(current->accountHolderName);
         int bankLength = strlen(current->bankName);
-        fwrite(current->accountNumber, sizeof(char), 11, file);
-        fwrite(&nameLength, sizeof(int), 1, file);
-        fwrite(current->accountHolderName, sizeof(char), nameLength, file);
-        fwrite(&bankLength, sizeof(int), 1, file);
-        fwrite(current->bankName, sizeof(char), bankLength, file);
-        fwrite(current->password, sizeof(char), 7, file);
-        fwrite(&(current->balance), sizeof(Balance), 1, file);
+        fprintf(file, "%s,%d,%s,%d,%s,%s,%llu.%d:", current->accountNumber, nameLength, current->accountHolderName, bankLength, current->bankName, current->password, current->balance.dollars, current->balance.cents);
         Transaction *trans = current->transactions;
         while (trans != NULL) {
-            int messageLength = strlen(trans->message);
-            fwrite(&messageLength, sizeof(int), 1, file);
-            fwrite(trans->message, sizeof(char), messageLength, file);
+            fprintf(file, "%s,", trans->message);
             trans = trans->next;
         }
-        int end = -1;
-        fwrite(&end, sizeof(int), 1, file);
+        fprintf(file, "-1\n");
         current = current->next;
     }
     fclose(file);
 }
 
-
 // 从文件中读取链表数据
 void loadBankAccounts() {
-    FILE *file = fopen("bankAccounts.dat", "rb");
+    FILE *file = fopen("bankAccounts.dat", "r");
     open_file(file);
     BankAccount *current = NULL;
-    while (1) {
+    char *line = NULL;
+    size_t len = 0;
+    while (fgets(line, len, file) != NULL) {
         BankAccount *newAccount = (BankAccount *) malloc(sizeof(BankAccount));
-        int nameLength, bankLength, messageLength, end;
-        fread(newAccount->accountNumber, sizeof(char), 11, file);
-        if (feof(file)) {
-            free(newAccount);
-            break;
-        }
-        fread(&nameLength, sizeof(int), 1, file);
+        char *token = strtok(line, ",");
+        strcpy(newAccount->accountNumber, token);
+        token = strtok(NULL, ",");
+        int nameLength = atoi(token);
+        token = strtok(NULL, ",");
         newAccount->accountHolderName = (char *) malloc(nameLength + 1);
-        fread(newAccount->accountHolderName, sizeof(char), nameLength, file);
-        newAccount->accountHolderName[nameLength] = '\0';
-        fread(&bankLength, sizeof(int), 1, file);
+        strcpy(newAccount->accountHolderName, token);
+        token = strtok(NULL, ",");
+        int bankLength = atoi(token);
+        token = strtok(NULL, ",");
         newAccount->bankName = (char *) malloc(bankLength + 1);
-        fread(newAccount->bankName, sizeof(char), bankLength, file);
-        newAccount->bankName[bankLength] = '\0';
-        fread(newAccount->password, sizeof(char), 7, file);
-        fread(&(newAccount->balance), sizeof(Balance), 1, file);
+        strcpy(newAccount->bankName, token);
+        token = strtok(NULL, ",");
+        strcpy(newAccount->password, token);
+        token = strtok(NULL, ":");
+        sscanf(token, "%llu.%d", &(newAccount->balance.dollars), &(newAccount->balance.cents));
         newAccount->transactions = NULL;
         Transaction *trans = NULL;
         while (1) {
-            fread(&messageLength, sizeof(int), 1, file);
-            if (messageLength == -1) {
+            token = strtok(NULL, ",");
+            if (strcmp(token, "-1") == 0) {
                 break;
             }
             Transaction *newTrans = (Transaction *) malloc(sizeof(Transaction));
             newTrans->next = NULL;
-            fread(newTrans->message, sizeof(char), messageLength, file);
-            newTrans->message[messageLength] = '\0';
+            strcpy(newTrans->message, token);
             if (trans == NULL) {
                 newAccount->transactions = newTrans;
             } else {
@@ -94,12 +84,16 @@ void loadBankAccounts() {
         }
         current = newAccount;
     }
+    if (line) {
+        free(line);
+    }
     fclose(file);
 }
 
+
 //初始化用户数据
 int DocumentVerification() {
-    if (fopen("bankAccounts.dat", "rb") == NULL) {
+    if (fopen("bankAccounts.txt", "r") == NULL) {
         createAccount("1234567890", "马宏泰", "麻花银行", "123456");
         createAccount("2234567890", "马泰", "麻花银行", "123456");
         createAccount("3234567890", "泰宏", "麻花银行", "123456");
