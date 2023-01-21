@@ -18,7 +18,7 @@ C/C++编译器 MinGW
 如果在运行中遇到问题，请检查是否安装了正确的环境。
 如果仍有问题，请提交 [issue](https://github.com/Rockytkg/bank_system/issues)。
 # 开发者
-Rockytkg
+Blog：[Rockytkg](https://letanml.xyz)
 # 下个版本计划
 * 开户
 * 转账
