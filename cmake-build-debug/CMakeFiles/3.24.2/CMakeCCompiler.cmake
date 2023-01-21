@@ -1,4 +1,4 @@
-set(CMAKE_C_COMPILER "D:/TDM-GCC-64/bin/gcc.exe")
+set(CMAKE_C_COMPILER "D:/compiler/C/TDM-GCC-64/bin/gcc.exe")
 set(CMAKE_C_COMPILER_ARG1 "")
 set(CMAKE_C_COMPILER_ID "GNU")
 set(CMAKE_C_COMPILER_VERSION "10.3.0")
@@ -21,11 +21,11 @@ set(CMAKE_C_SIMULATE_VERSION "")
 
 
 
-set(CMAKE_AR "D:/TDM-GCC-64/bin/ar.exe")
-set(CMAKE_C_COMPILER_AR "D:/TDM-GCC-64/bin/gcc-ar.exe")
-set(CMAKE_RANLIB "D:/TDM-GCC-64/bin/ranlib.exe")
-set(CMAKE_C_COMPILER_RANLIB "D:/TDM-GCC-64/bin/gcc-ranlib.exe")
-set(CMAKE_LINKER "D:/TDM-GCC-64/bin/ld.exe")
+set(CMAKE_AR "D:/compiler/C/TDM-GCC-64/bin/ar.exe")
+set(CMAKE_C_COMPILER_AR "D:/compiler/C/TDM-GCC-64/bin/gcc-ar.exe")
+set(CMAKE_RANLIB "D:/compiler/C/TDM-GCC-64/bin/ranlib.exe")
+set(CMAKE_C_COMPILER_RANLIB "D:/compiler/C/TDM-GCC-64/bin/gcc-ranlib.exe")
+set(CMAKE_LINKER "D:/compiler/C/TDM-GCC-64/bin/ld.exe")
 set(CMAKE_MT "")
 set(CMAKE_COMPILER_IS_GNUCC 1)
 set(CMAKE_C_COMPILER_LOADED 1)
@@ -66,7 +66,7 @@ endif()
 
 
 
-set(CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES "D:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/include;D:/TDM-GCC-64/include;D:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/include-fixed;D:/TDM-GCC-64/x86_64-w64-mingw32/include")
+set(CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES "D:/compiler/C/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/include;D:/compiler/C/TDM-GCC-64/include;D:/compiler/C/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/include-fixed;D:/compiler/C/TDM-GCC-64/x86_64-w64-mingw32/include")
 set(CMAKE_C_IMPLICIT_LINK_LIBRARIES "mingw32;gcc;pthread;gcc;kernel32;moldname;mingwex;kernel32;pthread;advapi32;shell32;user32;kernel32;mingw32;gcc;pthread;gcc;kernel32;moldname;mingwex;kernel32")
-set(CMAKE_C_IMPLICIT_LINK_DIRECTORIES "D:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0;D:/TDM-GCC-64/lib/gcc;D:/TDM-GCC-64/x86_64-w64-mingw32/lib;D:/TDM-GCC-64/lib")
+set(CMAKE_C_IMPLICIT_LINK_DIRECTORIES "D:/compiler/C/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0;D:/compiler/C/TDM-GCC-64/lib/gcc;D:/compiler/C/TDM-GCC-64/x86_64-w64-mingw32/lib;D:/compiler/C/TDM-GCC-64/lib")
 set(CMAKE_C_IMPLICIT_LINK_FRAMEWORK_DIRECTORIES "")
