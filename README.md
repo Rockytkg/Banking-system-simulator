@@ -20,7 +20,7 @@ C/C++编译器 MinGW
 # 开发者
 Blog：[Rockytkg](https://letanml.xyz)
 # 下个版本计划
-* 开户
+* 新建账户
 * 转账
 * 添加图形界面
 * 添加更多功能
