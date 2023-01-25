@@ -4,6 +4,26 @@
 BankAccount *head = NULL;
 BankAccount *currents = NULL;
 
+//打印当前链表中自定义用户开始以后的的所有数据
+void printBankAccount(BankAccount *account) {
+    while (account != NULL) {
+        printf("账号: %s\n", account->accountNumber);
+        printf("户主: %s\n", account->accountHolderName);
+        printf("开户银行: %s\n", account->bankName);
+        printf("密码: %s\n", account->password);
+        printf("余额: %llu.%d 元\n", account->balance.dollars, account->balance.cents);
+        printf("操作记录:\n");
+        Transaction *trans = account->transactions;
+        if (trans == NULL)
+            printf("没有操作记录！！！\n");
+        while (trans != NULL) {
+            printf("\t%s\n", trans->message);
+            trans = trans->next;
+        }
+        account = account->next;
+    }
+}
+
 //校验函数
 void open_file(FILE *fp) {
     if (fp == NULL) {
@@ -16,13 +36,14 @@ void open_file(FILE *fp) {
 }
 
 void saveBankAccounts() {
-    FILE *file = fopen("bankAccounts.dat", "w");
+    FILE *file = fopen("bankAccounts.txt", "w");
     open_file(file);
     BankAccount *current = head;
     while (current != NULL) {
         int nameLength = strlen(current->accountHolderName);
         int bankLength = strlen(current->bankName);
-        fprintf(file, "%s,%d,%s,%d,%s,%s,%llu.%d:", current->accountNumber, nameLength, current->accountHolderName, bankLength, current->bankName, current->password, current->balance.dollars, current->balance.cents);
+        fprintf(file, "%s,%d,%s,%d,%s,%s,%llu.%d:", current->accountNumber, nameLength, current->accountHolderName,
+                bankLength, current->bankName, current->password, current->balance.dollars, current->balance.cents);
         Transaction *trans = current->transactions;
         while (trans != NULL) {
             fprintf(file, "%s,", trans->message);
@@ -34,62 +55,79 @@ void saveBankAccounts() {
     fclose(file);
 }
 
-// 从文件中读取链表数据
 void loadBankAccounts() {
-    FILE *file = fopen("bankAccounts.dat", "r");
+    FILE *file = fopen("bankAccounts.txt", "r");
     open_file(file);
     BankAccount *current = NULL;
+    char c;
+    int i = 0;
     char *line = NULL;
-    size_t len = 0;
-    while (fgets(line, len, file) != NULL) {
-        BankAccount *newAccount = (BankAccount *) malloc(sizeof(BankAccount));
-        char *token = strtok(line, ",");
-        strcpy(newAccount->accountNumber, token);
-        token = strtok(NULL, ",");
-        int nameLength = atoi(token);
-        token = strtok(NULL, ",");
-        newAccount->accountHolderName = (char *) malloc(nameLength + 1);
-        strcpy(newAccount->accountHolderName, token);
-        token = strtok(NULL, ",");
-        int bankLength = atoi(token);
-        token = strtok(NULL, ",");
-        newAccount->bankName = (char *) malloc(bankLength + 1);
-        strcpy(newAccount->bankName, token);
-        token = strtok(NULL, ",");
-        strcpy(newAccount->password, token);
-        token = strtok(NULL, ":");
-        sscanf(token, "%llu.%d", &(newAccount->balance.dollars), &(newAccount->balance.cents));
-        newAccount->transactions = NULL;
-        Transaction *trans = NULL;
-        while (1) {
+    int len = 0;
+    while ((c = fgetc(file)) != EOF) {
+        //如果读取到换行符，表示一行数据读取完成
+        if (c == '\n') {
+            //结尾添加空字符
+            line[i] = '\0';
+            //按照逗号分割数据
+            char *token = strtok(line, ",");
+            BankAccount *newAccount = (BankAccount *) malloc(sizeof(BankAccount));
+            strcpy(newAccount->accountNumber, token);
             token = strtok(NULL, ",");
-            if (strcmp(token, "-1") == 0) {
-                break;
+            int nameLength = atoi(token);
+            token = strtok(NULL, ",");
+            newAccount->accountHolderName = (char *) malloc(sizeof(char) * (nameLength + 1));
+            strcpy(newAccount->accountHolderName, token);
+            token = strtok(NULL, ",");
+            int bankNameLength = atoi(token);
+            token = strtok(NULL, ",");
+            newAccount->bankName = (char *) malloc(sizeof(char) * (bankNameLength + 1));
+            strcpy(newAccount->bankName, token);
+            token = strtok(NULL, ",");
+            strcpy(newAccount->password, token);
+            token = strtok(NULL, ".");
+            newAccount->balance.dollars = atoi(token);
+            token = strtok(NULL, ":");
+            newAccount->balance.cents = atoi(token);
+            newAccount->transactions = NULL;
+            Transaction *currentTransaction = NULL;
+            token = strtok(NULL, ",");
+            while (strcmp(token, "-1") != 0) {
+                if (newAccount->transactions == NULL) {
+                    newAccount->transactions = (Transaction *) malloc(sizeof(Transaction));
+                    currentTransaction = newAccount->transactions;
+                } else {
+                    currentTransaction->next = (Transaction *) malloc(sizeof(Transaction));
+                    currentTransaction = currentTransaction->next;
+                }
+                strcpy(currentTransaction->message, token);
+                currentTransaction->next = NULL;
+                token = strtok(NULL, ",");
             }
-            Transaction *newTrans = (Transaction *) malloc(sizeof(Transaction));
-            newTrans->next = NULL;
-            strcpy(newTrans->message, token);
-            if (trans == NULL) {
-                newAccount->transactions = newTrans;
+            if (head == NULL) {
+                head = newAccount;
             } else {
-                trans->next = newTrans;
+                current->next = newAccount;
             }
-            trans = newTrans;
-        }
-        newAccount->next = NULL;
-        if (head == NULL) {
-            head = newAccount;
+            current = newAccount;
+            i = 0;
+            free(line);
+            line = NULL;
+            len = 0;
         } else {
-            current->next = newAccount;
+            if (i + 1 > len) {
+                len = 2 * len + 1;
+                line = (char *) realloc(line, sizeof(char) * len);
+            }
+            line[i++] = c;
         }
-        current = newAccount;
     }
-    if (line) {
-        free(line);
-    }
+    // 特别处理最后一个用户指向下一个用户的指针
+    if (current != NULL)
+        current->next = NULL;
+    free(line);
     fclose(file);
+    //printBankAccount(head);
 }
-
 
 //初始化用户数据
 int DocumentVerification() {
