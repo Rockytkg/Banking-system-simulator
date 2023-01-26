@@ -1,7 +1,0 @@
-# ninja log v5
-0	173	6959998889174910	build.ninja	5c41a19c2794d618
-2	714	6953003607161745	CMakeFiles/bank_system.dir/init.c.obj	f9566531f6c44953
-10	710	6953003607129288	CMakeFiles/bank_system.dir/menu.c.obj	aec56e2d0233687b
-16	766	6953003607683045	CMakeFiles/bank_system.dir/function.c.obj	27d8e2c469ca728d
-24	892	6953003608948826	CMakeFiles/bank_system.dir/GUI.cpp.obj	187825a7cc3f3075
-892	1030	6953003610281283	bank_system.exe	cea061168aeb8b73
