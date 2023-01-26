@@ -35,6 +35,10 @@ void countdown(int pause_time) {
         }
     }
     system("cls");
+    // 检测输入缓冲区是否为空防止在倒计时时输入
+    while(kbhit()){
+        getch();
+    }
 }
 
 // 隐藏输入密码，用*代替

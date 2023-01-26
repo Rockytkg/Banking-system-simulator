@@ -18,7 +18,7 @@ int main() {
             return 0;
     }
     saveBankAccounts();
-    puts("¸ÐÐ»Ê¹ÓÃ!!!");
+    puts("æ„Ÿè°¢ä½¿ç”¨!!!");
     countdown(100);
     return 0;
 }
