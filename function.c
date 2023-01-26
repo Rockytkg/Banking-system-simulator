@@ -118,7 +118,7 @@ int verify_password() {
 
 //查询余额
 void queryBalance() {
-    printf("当前账户余额为: %lld.%d 元\n", currents->balance.dollars, currents->balance.cents);
+    printf("当前账户余额为: %lld.%02d 元\n", currents->balance.dollars, currents->balance.cents);
 }
 
 //修改密码
@@ -269,8 +269,8 @@ int processBankAccount(int operation, unsigned long long integer, int fraction) 
             cents -= 100;
             dollars += 1;
         }
-        printf("存款 %lld.%d 元成功\n", integer, fraction);
-        printf("您当前余额为 %lld.%d 元\n", dollars, cents);
+        printf("存款 %lld.%02d 元成功\n", integer, fraction);
+        printf("您当前余额为 %lld.%02d 元\n", dollars, cents);
     } else if (operation == 2) {
         // 取款
         if (dollars < integer) {
@@ -283,8 +283,8 @@ int processBankAccount(int operation, unsigned long long integer, int fraction) 
             cents += 100;
             dollars -= 1;
         }
-        printf("取款 %lld.%d 元成功\n", integer, fraction);
-        printf("您当前余额为 %lld.%d 元\n", dollars, cents);
+        printf("取款 %lld.%02d 元成功\n", integer, fraction);
+        printf("您当前余额为 %lld.%02d 元\n", dollars, cents);
     } else {
         printf("无效的操作。\n");
     }
@@ -296,7 +296,6 @@ int processBankAccount(int operation, unsigned long long integer, int fraction) 
 //格式化操作数，用来去掉无意义的0
 void remove_trailing_zeros(char *amount, int i) {
     char buffer[100];  // 用于存储字符串的缓冲区
-
     if (i == 1)
         snprintf(buffer, sizeof(buffer), "%s %s %s", "存款", amount, "元");
     else if (i == 2)
@@ -306,13 +305,13 @@ void remove_trailing_zeros(char *amount, int i) {
 
 //按格式输入操作数
 void input_number(int i) {
-    char amount[16];  // 存储输入的金额字符串
-    char c;  // 存储输入的字符
-    int index = 0;  // 当前已输入字符的位置
-    int hasDecimal = 0;  // 标记是否已输入小数点
-    int decimals = 0;  // 小数部分的位数
+    char amount[20]; // 存储输入的金额字符串
+    char c; // 存储输入的字符
+    int index = 0; // 当前已输入字符的位置
+    int hasDecimal = 0; // 标记是否已输入小数点
+    int decimals = 0; // 小数部分的位数
     // 读取字符并将其加入字符串
-    while ((c = getch()) != '\r' && decimals <= 2) {
+    while ((c = getch()) != '\r') {
         if (isdigit(c) && hasDecimal != 1) {
             // 如果是数字，且整数部分还未超过 10 位，则将其加入字符串
             if (index < 10) {
@@ -338,6 +337,15 @@ void input_number(int i) {
                 decimals--;
             index--;
         }
+    }
+    // 检查输入是否包含小数点，如果没有，则在字符串末尾添加 .00
+    // 如果有，请检查小数点后有多少个字符。如果只有一个，就在末尾添加 0
+    if (!hasDecimal) {
+        amount[index++] = '.';
+        amount[index++] = '0';
+        amount[index++] = '0';
+    } else if (decimals == 1) {
+        amount[index++] = '0';
     }
     amount[index] = '\0';
     printf("\n");
