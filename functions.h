@@ -13,6 +13,10 @@
 #include <string.h>
 #include <tchar.h>
 #include <math.h>
+#include <openssl/evp.h>
+#include <openssl/err.h>
+#include <openssl/rand.h>
+#include <openssl/md5.h>
 
 //定义结构体
 typedef struct Balance {
@@ -49,6 +53,9 @@ int menu3();
 void menu4();
 
 void menu5();
+
+//输入选择
+int input_select();
 
 //校验函数
 void open_file(FILE *fp);
@@ -104,14 +111,23 @@ void input_number(int i);
 //处理输入的操作数方便余额计算
 void parse_string(char *str, int i);
 
+//初始化用户数据
+int DocumentVerification();
+
 // 将链表数据存储在文件中
 void saveBankAccounts();
 
 // 从文件中读取链表数据
 void loadBankAccounts();
 
-//初始化用户数据
-int DocumentVerification();
+//打印当前链表中自定义用户开始以后的的所有数据
+void printBankAccount(BankAccount *account);
 
-//输入选择
-int input_select();
+// 加密文件
+void encrypt_file();
+
+// 解密文件
+void decrypt_file();
+
+// 存储、读取、生成密钥
+void readWriteEncryptionKey();
