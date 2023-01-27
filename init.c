@@ -221,4 +221,5 @@ void generateKey() {
         fwrite(key, 1, 16, fp);
         fclose(fp);
     }
+    RAND_cleanup();
 }
