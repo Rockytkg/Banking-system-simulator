@@ -22,6 +22,7 @@ void printBankAccount(BankAccount *account) {
             printf("%s\n", trans->message);
             trans = trans->next;
         }
+        printf("\n");
         account = account->next;
     }
     countdown(120);
