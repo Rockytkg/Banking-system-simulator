@@ -59,7 +59,7 @@ void menu2() {
                 withdraw();
                 break;
             case 3:
-                printf("蝕窟嶄，，，，，，，");
+                makeTransfer();
                 break;
             case 4:
                 change_password();

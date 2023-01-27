@@ -64,7 +64,7 @@ void open_file(FILE *fp);
 void hide_password(char *key);
 
 // 输入账户
-void input_account(char *id);
+void input_account(char *id,int i);
 
 //密码验证函数
 int verify_password();
@@ -81,11 +81,14 @@ void withdraw();
 // 存款函数
 void deposit();
 
+//转账
+void makeTransfer();
+
 //创建新的账户
 BankAccount *createAccount(char *accountNumber, char *accountHolderName, char *bankName, char *password);
 
 //向给定的账户添加新的交易信息
-void addTransaction(char *message);
+void addTransaction(char *message,BankAccount *current);
 
 //打印给定账户的所有交易信息
 void printTransactions();

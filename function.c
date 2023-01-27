@@ -3,6 +3,8 @@
 //名为 head 的全局变量，该变量将指向链表的第一个账户
 extern BankAccount *head;
 extern BankAccount *currents;
+BankAccount *accountes;
+char accounts[11];
 
 // 清空缓存区
 void clear_kb_buffer() {
@@ -38,7 +40,7 @@ void countdown(int pause_time) {
         for (actual_time = 30; actual_time > sleep_time; actual_time--) {
             printf("正在操作，请稍等 %d \r", actual_time);
             fflush(stdout);
-            Sleep(1000);
+            //Sleep(1000);
         }
     }
     system("cls");
@@ -49,6 +51,7 @@ void countdown(int pause_time) {
 void hide_password(char *key) {
     int index = 0;
     char buff;
+    clear_kb_buffer();
     // 当输入的字符不是回车，或者输入的字符数还没有达到最大长度时进入循环
     while ((buff = getch()) != '\r' || index < 6) {
         // 检查字符是否为数字，否则如果输入的字符是退格，并且密码中有字符，则删除最后一个字符
@@ -65,14 +68,16 @@ void hide_password(char *key) {
     }
     key[index] = '\0'; // 在密码的末尾加上终止符
     printf("\n");
+    clear_kb_buffer();
 }
 
 // 输入账户
-void input_account(char *id) {
+void input_account(char *id, int i) {
     int index = 0;
     char ch;
+    BankAccount *current = NULL;
     printf("请输入账号:");
-    while (currents == NULL) {
+    do {
         while ((ch = getch()) != '\r' || index < 10) {
             // 检查字符是否为数字，否则如果输入的字符是退格，并且id中有字符，则删除最后一个字符
             if (isdigit(ch)) {
@@ -88,18 +93,23 @@ void input_account(char *id) {
         }
         id[index] = '\0'; // 在末尾加上终止符
         printf("\n");
-        currents = findAccount(id);
-        if (currents == NULL) {
+        current = findAccount(id);
+        if (current == NULL) {
             printf("您输入的账号不存在,请重新输入:");
             index = 0;
         }
-    }
+        if (current != NULL && i == 1)
+            currents = findAccount(id);
+        else if (current != NULL && i == 2)
+            accountes = findAccount(id);
+    } while (current == NULL);
+    clear_kb_buffer();
 }
 
 //密码验证，正确返回1，错误返回0
 int verify_password() {
     char key[7], password[7], id[11];
-    input_account(id);
+    input_account(id, 1);
     int sum = 3;
     strcpy(key, currents->password);
     printf("请输入密码:");
@@ -189,7 +199,7 @@ BankAccount *createAccount(char *accountNumber, char *accountHolderName, char *b
 }
 
 //向给定的账户添加新的交易信息
-void addTransaction(char *message) {
+void addTransaction(char *message, BankAccount *current) {
     // 获取当前时间
     time_t t = time(NULL);
     struct tm *timeInfo = localtime(&t);
@@ -199,8 +209,8 @@ void addTransaction(char *message) {
     snprintf(timeStr, sizeof(timeStr), "%s %s", timeStr, message);
     Transaction *transaction = malloc(sizeof(Transaction));
     strncpy(transaction->message, timeStr, sizeof(transaction->message));
-    transaction->next = currents->transactions;
-    currents->transactions = transaction;
+    transaction->next = current->transactions;
+    current->transactions = transaction;
 }
 
 //打印给定账户的所有交易信息
@@ -264,8 +274,8 @@ void deleteAccount() {
 
 //余额处理函数，避免精度丢失的问题
 int processBankAccount(int operation, unsigned long long integer, int fraction) {
-    unsigned long long dollars;
-    int cents;
+    unsigned long long dollars, dollar;
+    int cents, cent;
     dollars = currents->balance.dollars;
     cents = currents->balance.cents;
     countdown(0); // 随机模拟等待时间
@@ -293,6 +303,33 @@ int processBankAccount(int operation, unsigned long long integer, int fraction) 
         }
         printf("取款 %lld.%02d 元成功\n", integer, fraction);
         printf("您当前余额为 %lld.%02d 元\n", dollars, cents);
+    } else if (operation == 3) {
+        if (dollars < integer) {
+            printf("\n余额不足，无法转账。\n");
+            return 0;
+        }
+        dollars -= integer;
+        cents -= fraction;
+        if (cents < 0) {
+            cents += 100;
+            dollars -= 1;
+        }
+        printf("转账给 %s %lld.%02d 元成功\n", accounts, integer, fraction);
+        printf("您当前余额为 %lld.%02d 元\n", dollars, cents);
+        // 为收款账户增加余额，并写入收款账户的操作记录
+        dollar = accountes->balance.dollars;
+        cent = accountes->balance.cents;
+        dollar += integer;
+        cent += fraction;
+        if (cent >= 100) {
+            cent -= 100;
+            dollar += 1;
+        }
+        accountes->balance.dollars = dollar;
+        accountes->balance.cents = cent;
+        currents->balance.dollars = dollars;
+        currents->balance.cents = cents;
+        return 2;
     } else {
         printf("无效的操作。\n");
     }
@@ -308,7 +345,14 @@ void remove_trailing_zeros(char *amount, int i) {
         snprintf(buffer, sizeof(buffer), "%s %s %s", "存款", amount, "元");
     else if (i == 2)
         snprintf(buffer, sizeof(buffer), "%s %s %s", "取款", amount, "元");
-    addTransaction(buffer);
+    else if (i == 3)
+        snprintf(buffer, sizeof(buffer), "%s %s %s %s", "转账给", accounts, amount, "元");
+    else if (i == 4) {
+        snprintf(buffer, sizeof(buffer), "%s %s %s", "收到转账", amount, "元");
+        addTransaction(buffer, accountes);
+        return;
+    }
+    addTransaction(buffer, currents);
 }
 
 //按格式输入操作数
@@ -364,7 +408,7 @@ void input_number(int i) {
 //处理输入的操作数方便余额计算
 void parse_string(char *str, int i) {
     char *endptr;
-    int fraction;
+    int fraction, m;
     unsigned long long integer;
     integer = strtol(str, &endptr, 10);
     if (*endptr == '.') {
@@ -372,6 +416,22 @@ void parse_string(char *str, int i) {
     } else {
         fraction = 0;
     }
-    if (processBankAccount(i, integer, fraction) == 1)
+    m = processBankAccount(i, integer, fraction);
+    if (m == 1)
         remove_trailing_zeros(str, i);
+    else if (m == 2) {
+        remove_trailing_zeros(str, 4);
+        remove_trailing_zeros(str, 3);
+    }
+}
+
+//转账
+void makeTransfer() {
+    int choose;
+    do {
+        input_account(accounts, 2);
+        printf("请输入转账金额:");
+        input_number(3);
+        choose = menu3();
+    } while (choose == 2);
 }
