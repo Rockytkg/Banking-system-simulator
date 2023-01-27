@@ -4,6 +4,13 @@
 extern BankAccount *head;
 extern BankAccount *currents;
 
+// 清空缓存区
+void clear_kb_buffer() {
+    while (kbhit()) {
+        getch();
+    }
+}
+
 //暂停时间
 void countdown(int pause_time) {
     int sleep_time, actual_time;
@@ -35,10 +42,7 @@ void countdown(int pause_time) {
         }
     }
     system("cls");
-    // 检测输入缓冲区是否为空防止在倒计时时输入
-    while(kbhit()){
-        getch();
-    }
+    clear_kb_buffer();
 }
 
 // 隐藏输入密码，用*代替
@@ -297,7 +301,7 @@ int processBankAccount(int operation, unsigned long long integer, int fraction) 
     return 1;
 }
 
-//格式化操作数，用来去掉无意义的0
+//格式化操作数
 void remove_trailing_zeros(char *amount, int i) {
     char buffer[100];  // 用于存储字符串的缓冲区
     if (i == 1)
@@ -309,16 +313,17 @@ void remove_trailing_zeros(char *amount, int i) {
 
 //按格式输入操作数
 void input_number(int i) {
-    char amount[20]; // 存储输入的金额字符串
+    char amount[30]; // 存储输入的金额字符串
     char c; // 存储输入的字符
     int index = 0; // 当前已输入字符的位置
     int hasDecimal = 0; // 标记是否已输入小数点
     int decimals = 0; // 小数部分的位数
+    clear_kb_buffer();
     // 读取字符并将其加入字符串
-    while ((c = getch()) != '\r') {
+    while ((c = getch()) != '\r' || index == 0) {
         if (isdigit(c) && hasDecimal != 1) {
-            // 如果是数字，且整数部分还未超过 10 位，则将其加入字符串
-            if (index < 10) {
+            // 如果是数字，且整数部分还未超过 20 位，则将其加入字符串
+            if (index < 14) {
                 amount[index++] = c;
                 putchar(c);
             }
