@@ -14,14 +14,14 @@
 
 # 环境需求
 
-C/C++编译器 MinGW
+C/C++编译器 MinGW，OpenSSL库（[Win64 OpenSSL v3.0.7](http://slproweb.com/download/Win64OpenSSL-3_0_7.exe)），EasyX图形库（暂时不需要）
 
 # 使用方法
 
-安装 C 编译器和
-下载本项目的源代码
-编译并运行
-按照程序提示操作
+1. 安装 C 编译器和、
+2. 下载本项目的源代码
+3. 编译并运行
+4. 按照程序提示操作
 
 # 注意事项
 
