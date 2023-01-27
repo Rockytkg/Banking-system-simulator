@@ -14,9 +14,9 @@
 #include <tchar.h>
 #include <math.h>
 #include <openssl/evp.h>
-#include <openssl/err.h>
 #include <openssl/rand.h>
 #include <openssl/md5.h>
+#include <openssl/aes.h>
 
 //定义结构体
 typedef struct Balance {
@@ -114,6 +114,9 @@ void parse_string(char *str, int i);
 //初始化用户数据
 int DocumentVerification();
 
+// 清空缓存区
+void clear_kb_buffer();
+
 // 将链表数据存储在文件中
 void saveBankAccounts();
 
@@ -129,5 +132,5 @@ void encrypt_file();
 // 解密文件
 void decrypt_file();
 
-// 存储、读取、生成密钥
-void readWriteEncryptionKey();
+// 读取密钥
+void generateKey();

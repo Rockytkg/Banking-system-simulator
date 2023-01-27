@@ -3,8 +3,10 @@
 extern "C" {
 #include "functions.h"
 }
+extern unsigned char key[16];
 
 int main() {
+    generateKey();
     menu1();
     menu5();
     if (DocumentVerification() == 1)
@@ -18,7 +20,7 @@ int main() {
             return 0;
     }
     saveBankAccounts();
-    puts("æ„Ÿè°¢ä½¿ç”¨!!!");
+    puts("¸ÐÐ»Ê¹ÓÃ!!!");
     countdown(100);
     return 0;
 }
