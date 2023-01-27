@@ -4,7 +4,7 @@ int input_select() {
     saveBankAccounts();
     char ch, choose;
     int index = 0;
-    while ((ch = getch()) != '\r') {
+    while ((ch = getch()) != '\r' || index == 0) {
         if (isdigit(ch)) {
             if (index < 1) {
                 putchar(ch);
@@ -110,7 +110,8 @@ void menu4() {
 
 void menu5() {
     printf("\033[1;31m程序说明：\033[0m\n\n");
-    printf("\033[1m本程序会在当前目录下创建\033[32m'bankAccounts.dat'\033[0m文件，用于存储数据，如果已经存在这个文件，请做好备份，\n");
+    printf("\033[1m本程序会在当前目录下创建\033[32m'AESBankAccounts.txt'\033[0m文件，用于存储数据，如果已经存在这个文件，请做好备份，\n");
+    printf("\033[1m本程序会在当前目录下创建\033[32m'key.bin'\033[0m文件，用于存储密钥，如果已经存在这个文件，请做好备份，\n");
     printf("因为本程序可能会\033[1;31m修改\033[0m\033[1m这个文件的内容(提示：不在使用本程序后请自行删除)\n\n");
     printf("\033[1;31m警告：\n");
     printf("如不接受，请立即关闭此程序！！！\n\n\033[0m");
