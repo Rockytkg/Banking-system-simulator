@@ -2,7 +2,13 @@
 
 //名为 head 的全局变量，该变量将指向链表的第一个账户
 BankAccount *head = NULL;
+// currents 指向当前用户
 BankAccount *currents = NULL;
+// currents 指向收款用户
+BankAccount *accountes;
+// accounts 数组储存收款用户账号
+char accounts[11];
+// key 数组储存密钥
 unsigned char key[16];
 
 //打印当前链表中自定义用户开始以后的的所有数据
@@ -13,7 +19,7 @@ void printBankAccount(BankAccount *account) {
         printf("户主: %s\n", account->accountHolderName);
         printf("开户银行: %s\n", account->bankName);
         printf("密码: %s\n", account->password);
-        printf("余额: %llu.%d 元\n", account->balance.dollars, account->balance.cents);
+        printf("余额: %llu.%02d 元\n", account->balance.dollars, account->balance.cents);
         printf("操作记录:\n");
         Transaction *trans = account->transactions;
         if (trans == NULL)
