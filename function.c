@@ -1,10 +1,9 @@
 #include "functions.h"
 
-//名为 head 的全局变量，该变量将指向链表的第一个账户
 extern BankAccount *head;
 extern BankAccount *currents;
-BankAccount *accountes;
-char accounts[11];
+extern BankAccount *accountes;
+extern char accounts[11];
 
 // 清空缓存区
 void clear_kb_buffer() {
@@ -204,7 +203,7 @@ void addTransaction(char *message, BankAccount *current) {
     time_t t = time(NULL);
     struct tm *timeInfo = localtime(&t);
     // 将时间转换为 24 小时制字符串
-    char timeStr[50];
+    char timeStr[1050];
     strftime(timeStr, sizeof(timeStr), "[%Y-%m-%d %H:%M:%S]", timeInfo);
     snprintf(timeStr, sizeof(timeStr), "%s %s", timeStr, message);
     Transaction *transaction = malloc(sizeof(Transaction));
@@ -340,7 +339,7 @@ int processBankAccount(int operation, unsigned long long integer, int fraction) 
 
 //格式化操作数
 void remove_trailing_zeros(char *amount, int i) {
-    char buffer[100];  // 用于存储字符串的缓冲区
+    char buffer[1000];  // 用于存储字符串的缓冲区
     if (i == 1)
         snprintf(buffer, sizeof(buffer), "%s %s %s", "存款", amount, "元");
     else if (i == 2)
