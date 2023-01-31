@@ -364,6 +364,14 @@ void input_number(int i) {
     clear_kb_buffer();
     // 读取字符并将其加入字符串
     while ((c = getch()) != '\r' || index == 0) {
+        // 当第1次有效输入为0，则限制第2个有效输入只能为小数点
+        if (amount[0] == '0' && index == 1 && c != '.') {
+            if (c == '\b') {
+                printf("\b \b");
+                index--;
+            }
+            continue;
+        }
         if (isdigit(c) && hasDecimal != 1) {
             // 如果是数字，且整数部分还未超过 20 位，则将其加入字符串
             if (index < 14) {
@@ -391,9 +399,13 @@ void input_number(int i) {
         }
     }
     // 检查输入是否包含小数点，如果没有，则在字符串末尾添加 .00
-    // 如果有，请检查小数点后有多少个字符。如果只有一个，就在末尾添加 0
+    // 如果有，请检查小数点后有多少个字符。如果没有字符，就在末尾添加 00
+    // 如果只有一个，就在末尾添加 0
     if (!hasDecimal) {
         amount[index++] = '.';
+        amount[index++] = '0';
+        amount[index++] = '0';
+    } else if (decimals == 0) {
         amount[index++] = '0';
         amount[index++] = '0';
     } else if (decimals == 1) {
